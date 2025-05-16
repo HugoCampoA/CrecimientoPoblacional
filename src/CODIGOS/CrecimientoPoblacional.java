@@ -546,7 +546,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
 
     }
 
-    public String tratarNum(double num) {
+    public String truncar(double num) {
         BigDecimal bdC = BigDecimal.valueOf(num).setScale(nDecimales, RoundingMode.DOWN);
         return limpiarDecimal(bdC);
 
@@ -554,80 +554,75 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
 
     public void calcularFuncion() throws BadLocationException {
         try {
-
             limpiarTextPane(jTxPaneFuncion);
             StringBuilder sb = new StringBuilder();
-            String paso4 = "", paso5 = "", paso6 = "";
+            String paso[] = new String[20];
 
             String tiempo1 = jTxtTiempo1.getText();
             String poblacion1 = jTxtPob1.getText();
             String tiempo2 = jTxtTiempo2.getText();
             String poblacion2 = jTxtPob2.getText();
 
-            String paso1 = String.format("t_1=%s \\quad P_1=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo1, poblacion1, tiempo1, poblacion1);
-            String paso2 = String.format("t_2=%s \\quad P_2=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo2, poblacion2, tiempo2, poblacion2);
+            paso[0] = String.format("t_1=%s \\quad P_1=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo1, poblacion1, tiempo1, poblacion1);
+            paso[1] = String.format("t_2=%s \\quad P_2=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo2, poblacion2, tiempo2, poblacion2);
 
             double t1 = Double.parseDouble(tiempo1);
             double p1 = Double.parseDouble(poblacion1);
             double t2 = Double.parseDouble(tiempo2);
             double p2 = Double.parseDouble(poblacion2);
 
-            k = Math.log(p2 / p1) / (t2 - t1);
-            c = p1 / Math.pow(Math.E, t1 * k);
+            k = Double.parseDouble(truncar(Math.log(p2 / p1) / (t2 - t1)));
+            c = Double.parseDouble(truncar(p1 / Math.pow(Math.E, t1 * k)));
 
             nDecimales = jSlrDecimales.getValue();
 
-            // Truncamiento sin redondeo
-            BigDecimal bdC = BigDecimal.valueOf(c).setScale(nDecimales, RoundingMode.DOWN);
-            BigDecimal bdK = BigDecimal.valueOf(k).setScale(nDecimales, RoundingMode.DOWN);
-
-            String fc = limpiarDecimal(bdC);
-            String fk = limpiarDecimal(bdK);
             String formulaInicial = String.format("P(t)=Ce^{kt}");
-            String paso3 = String.format("P(%s)=Ce^{k(%s)}", tiempo1, tiempo1);
+            paso[2] = formulaInicial;
+            paso[3] = String.format("P(%s)=Ce^{k(%s)}", tiempo1, tiempo1);
+
             if (t1 == 0) {
-                paso4 = String.format("%s=Ce^{" + tiempo1 + "}", poblacion1);
-                paso5 = String.format("%s=C(1)", poblacion1);
-                paso6 = String.format("C=%s", tratarNum(p1 / Math.pow(Math.E, t1 * k)));
+                paso[4] = String.format("%s=Ce^{" + tiempo1 + "}", poblacion1);
+                paso[5] = String.format("%s=C(1)", poblacion1);
+                paso[6] = String.format("C=%s", truncar(p1 / Math.pow(Math.E, t1 * k)));
+                paso[7] = String.format("P(t)= %s e^{kt}", (c));
+                paso[8] = String.format("P(%s)=" + (c) + "e^{k(%s)}", tiempo2, tiempo2);
+                paso[9] = String.format("%s=" + (c) + "e^{%sk}", poblacion2, tiempo2);
+                paso[10] = String.format("\\frac{%s}{" + poblacion1 + "}=e^{%sk}", poblacion2, tiempo2);
+                paso[11] = String.format(truncar(p2 / p1) + "=e^{%sk}", tiempo2);
+                paso[12] = String.format("\\ln{(" + truncar(p2 / p1) + ")}=\\ln{e^{%sk}}", tiempo2);
+                paso[13] = String.format(truncar(Math.log(p2 / p1)) + "=%sk", truncar(t2 - t1));
+                paso[14] = String.format("k=\\frac{" + truncar(Math.log(p2 / p1)) + "}{" + truncar(t2 - t1) + "}");
+                paso[15] = String.format("k=" + truncar(Math.log(p2 / p1) / (t2 - t1)));
+                paso[16] = String.format("\\textcolor{blue}{P(t) = %s e^{%st}}", (c), (k));
+            } else {
+                paso[4] = String.format("%s=Ce^{%sk}", poblacion1, tiempo1);
+                paso[5] = String.format("\\frac{%s}{e^{%sk}}=C", poblacion1, tiempo1, tiempo2);
+                paso[6] = String.format("C=%se^{-%sk}", poblacion1, tiempo1);
+                paso[7] = String.format("P(t)= %s e^{-%sk} e^{kt}", poblacion1, tiempo1);
+                paso[8] = String.format("P(%s)={%s}{e^{-%sk}}e^{k(%s)}", tiempo2, poblacion1, tiempo1, tiempo2);
+                paso[9] = String.format("%s={%s}{e^{-%sk}}e^{%sk}", poblacion2, poblacion1, tiempo1, tiempo2);
+                paso[10] = String.format("\\frac{%s}{" + poblacion1 + "}=e^{{" + truncar(t2 - t1) + "}k}", poblacion2);
+                paso[11] = String.format(truncar(p2 / p1) + "=e^{{" + truncar(t2 - t1) + "}k}");
+                paso[12] = String.format("\\ln{(" + truncar(p2 / p1) + ")}=\\ln{e^{{" + truncar(t2 - t1) + "}k}}");
+                paso[13] = String.format(truncar(Math.log(p2 / p1)) + "=%sk", truncar(t2 - t1));
+                paso[14] = String.format("k=\\frac{" + truncar(Math.log(p2 / p1)) + "}{" + truncar(t2 - t1) + "}");
+                paso[15] = String.format("k=" + truncar(k));
+                paso[16] = String.format("C=%s{e^{-%s(%s)}}", poblacion1, tiempo1, (k));
+                paso[17] = String.format("C=%s {(%s)}", poblacion1, truncar(Math.pow(Math.E, (-t1) * (k))));
+                paso[18] = String.format("C=%s", c);
+                paso[19] = String.format("\\textcolor{blue}{P(t) = %s e^{%st}}", (c), (k));
             }
-            String paso7 = String.format("P(t)=" + tratarNum(c) + "e^{kt}");
-            String paso8 = String.format("P(%s)=" + tratarNum(c) + "e^{k(%s)}", tiempo2, tiempo2);
-            String paso9 = String.format("%s=" + tratarNum(c) + "e^{%sk}", poblacion2, tiempo2);
-            String paso10 = String.format("\\frac{%s}{" + poblacion1 + "}=e^{%sk}", poblacion2, tiempo2);
-            String paso11 = String.format(tratarNum(p2 / p1) + "=e^{%sk}", tiempo2);
-            String paso12 = String.format("\\ln{(" + tratarNum(p2 / p1) + ")}=\\ln{e^{%sk}}", tiempo2);
-            String paso13 = String.format(tratarNum(Math.log(p2 / p1)) + "=%sk", tratarNum(t2 - t1));
-            String paso14 = String.format("k=\\frac{" + tratarNum(Math.log(p2 / p1)) + "}{" + tratarNum(t2 - t1) + "}");
-            String paso15 = String.format("k=" + tratarNum(Math.log(p2 / p1) / (t2 - t1)));
-            String paso16 = String.format("\\textcolor{blue}{P(t) = %s e^{%st}}", tratarNum(c), tratarNum(k));
 
-            sb.append(paso1).append(" \\\\ ")
-                    .append(paso2).append(" \\\\ ")
-                    .append(formulaInicial).append(" \\\\ ")
-                    .append(paso3).append(" \\\\ ")
-                    .append(paso4).append(" \\\\ ")
-                    .append(paso5).append(" \\\\ ")
-                    .append(paso6).append(" \\\\ ")
-                    .append(paso7).append(" \\\\ ")
-                    .append(paso8).append(" \\\\ ")
-                    .append(paso9).append(" \\\\ ")
-                    .append(paso10).append(" \\\\ ")
-                    .append(paso11).append(" \\\\ ")
-                    .append(paso12).append(" \\\\ ")
-                    .append(paso13).append(" \\\\ ")
-                    .append(paso14).append(" \\\\ ")
-                    .append(paso15).append(" \\\\ ")
-                    .append(paso16).append(" \\\\ ");
-// Finalmente, agregamos al JTextPane como una sola imagen
+            for (String pasos : paso) {
+                sb.append(pasos).append(" \\\\ ");
+            }
+            
             agregarLaTeX(jTxPaneFuncion, sb.toString());
-
-            c = Double.parseDouble(fc);
-            k = Double.parseDouble(fk);
 
             System.out.println("c: " + c);
             System.out.println("k: " + k);
-            // Construir expresión LaTeX
-            funcion = String.format("P(t) = %s \\cdot e^{%st}", fc, fk);
+
+            funcion = String.format("P(t) = %s \\cdot e^{%st}", c, k);
 
             textoLatex(jLbFuncion, funcion);
             estado1 = true;
@@ -669,17 +664,17 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             String tiempo3 = jTxtT3.getText();
             t3 = Double.parseDouble(tiempo3);
             p3 = c * Math.pow(Math.E, k * t3);
-            jLbPob3.setText("" + tratarNum(p3));
+            jLbPob3.setText("" + truncar(p3));
 //            BigDecimal bdP3 = BigDecimal.valueOf(p3).setScale(nDecimales, RoundingMode.DOWN);
 //            String fc = limpiarDecimal(bdP3);
             //String letrero1=String.format("Obteniendo\\quadla\\quadpoblación\\quadpara\\quadun\\quadtiempo\\quadde\\quad"+tiempo3+"\\quadaños.");
             String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo la población para un tiempo de %s años.}", tiempo3);
             String letrero2 = String.format("P=? \\quad t=%s", tiempo3);
-            String letrero3 = String.format("P(t) = %s e^{%st}", tratarNum(c), tratarNum(k));
-            String paso1 = String.format("P(%s) = %s \\cdot e^{%s(%s)}", tiempo3, tratarNum(c), tratarNum(k), tiempo3);
-            String paso2 = String.format("P(%s) = %s \\cdot e^{" + tratarNum(k * t3) + "}", tiempo3, tratarNum(c));
-            String paso3 = String.format("P(%s) = %s (" + tratarNum(Math.pow(Math.E, k * t3)) + ")", tiempo3, tratarNum(c));
-            String paso4 = String.format("\\textcolor{blue}{P(%s) = " + tratarNum(c * Math.pow(Math.E, k * t3)) + "}", tiempo3);
+            String letrero3 = String.format("P(t) = %s e^{%st}", truncar(c), truncar(k));
+            String paso1 = String.format("P(%s) = %s \\cdot e^{%s(%s)}", tiempo3, truncar(c), truncar(k), tiempo3);
+            String paso2 = String.format("P(%s) = %s \\cdot e^{" + truncar(k * t3) + "}", tiempo3, truncar(c));
+            String paso3 = String.format("P(%s) = %s (" + truncar(Math.pow(Math.E, k * t3)) + ")", tiempo3, truncar(c));
+            String paso4 = String.format("\\textcolor{blue}{P(%s) = " + truncar(c * Math.pow(Math.E, k * t3)) + "}", tiempo3);
 
             sb.append(letrero1).append(" \\\\ ")
                     .append(letrero2).append(" \\\\ ")
@@ -705,17 +700,17 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             String poblacion3 = jTxtP3.getText();
             p3 = Double.parseDouble(poblacion3);
             t3 = Math.log(p3 / c) / k;
-            jLbT3.setText(tratarNum(t3) + " " + jCbxTiempo.getSelectedItem().toString());
+            jLbT3.setText(truncar(t3) + " " + jCbxTiempo.getSelectedItem().toString());
             String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo el tiempo para una población de %s.}", poblacion3);
             String letrero2 = String.format("P=%s \\quad t=?", poblacion3);
-            String letrero3 = String.format("P(t) = %s e^{%st}", tratarNum(c), tratarNum(k));
-            String letrero4 = String.format("%s= %s\\cdot e^{" + tratarNum(k) + "t}", poblacion3, tratarNum(c));
-            String letrero5 = String.format("\\frac{%s}{%s}=e^{" + tratarNum(k) + "t}", poblacion3, tratarNum(c));
-            String letrero6 = String.format(tratarNum(p3 / c) + "=e^{" + tratarNum(k) + "t}");
-            String letrero7 = String.format("\\ln{(" + tratarNum(p3 / c) + ")}=\\ln{(e^{" + tratarNum(k) + "t})}");
-            String letrero8 = String.format(tratarNum(Math.log(p3 / c)) + "=" + tratarNum(k) + "t");
-            String letrero9 = String.format("t=\\frac{" + tratarNum(Math.log(p3 / c)) + "}{%s}", tratarNum(k));
-            String letrero10 = String.format("\\textcolor{blue}{t=" + tratarNum(Math.log(p3 / c) / k) + "}");
+            String letrero3 = String.format("P(t) = %s e^{%st}", truncar(c), truncar(k));
+            String letrero4 = String.format("%s= %s\\cdot e^{" + truncar(k) + "t}", poblacion3, truncar(c));
+            String letrero5 = String.format("\\frac{%s}{%s}=e^{" + truncar(k) + "t}", poblacion3, truncar(c));
+            String letrero6 = String.format(truncar(p3 / c) + "=e^{" + truncar(k) + "t}");
+            String letrero7 = String.format("\\ln{(" + truncar(p3 / c) + ")}=\\ln{(e^{" + truncar(k) + "t})}");
+            String letrero8 = String.format(truncar(Math.log(p3 / c)) + "=" + truncar(k) + "t");
+            String letrero9 = String.format("t=\\frac{" + truncar(Math.log(p3 / c)) + "}{%s}", truncar(k));
+            String letrero10 = String.format("\\textcolor{blue}{t=" + truncar(Math.log(p3 / c) / k) + "}");
             // Armamos todo en un solo bloque LaTeX
             sb.append(letrero1).append(" \\\\ ")
                     .append(letrero2).append(" \\\\ ")
@@ -770,7 +765,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         }
 
         SwingUtilities.invokeLater(() -> {
-                int x = (jPanelPrincipal.getWidth() - jLbTitulo.getWidth()) / 2;
+            int x = (jPanelPrincipal.getWidth() - jLbTitulo.getWidth()) / 2;
             int y = jLbTitulo.getY();
             jLbTitulo.setLocation(x, y);
         });
