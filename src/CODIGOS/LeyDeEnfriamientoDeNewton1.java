@@ -35,18 +35,18 @@ import javax.swing.JTextPane;
  *
  * @author hugoocampo
  */
-public class CrecimientoPoblacional extends javax.swing.JFrame {
+public class LeyDeEnfriamientoDeNewton1 extends javax.swing.JFrame {
 
     double t1, t2, p1, p2, c, k;
+    String funcion = "";
     String vC = "";
     String vK = "";
-    String funcion = "";
     int nDecimales = 2;
     boolean estado1 = false;
     boolean estado2 = false;
     boolean estado3 = false;
 
-    public CrecimientoPoblacional() {
+    public LeyDeEnfriamientoDeNewton1() {
         initComponents();
         establecerTamVentanP();
         jLbNumDec.setText("" + jSlrDecimales.getValue());
@@ -72,11 +72,13 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jTxtTiempo1 = new javax.swing.JTextField();
         jTxtPob1 = new javax.swing.JTextField();
         jLbObservacion1 = new javax.swing.JLabel();
+        jLbObservacion3 = new javax.swing.JLabel();
         jPanelObservacion2 = new javax.swing.JPanel();
         jTxtTiempo2 = new javax.swing.JTextField();
         jTxtPob2 = new javax.swing.JTextField();
         jLbObservacion2 = new javax.swing.JLabel();
-        jBtnCalcularFuncion = new javax.swing.JButton();
+        jLbObservacion4 = new javax.swing.JLabel();
+        jBtnCalcular = new javax.swing.JButton();
         jLbTitulo = new javax.swing.JLabel();
         jLbFuncion = new javax.swing.JLabel();
         jBtnLimpiar = new javax.swing.JButton();
@@ -110,8 +112,11 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTxtTempMedio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelPrincipal.setBackground(new java.awt.Color(0, 51, 102));
         jPanelPrincipal.setLayout(null);
@@ -119,7 +124,10 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jPanelObservacion1.setBackground(new java.awt.Color(0, 153, 255));
 
         jLbObservacion1.setBackground(new java.awt.Color(255, 255, 255));
-        jLbObservacion1.setText("Observacion 1");
+        jLbObservacion1.setText("Tiempo 1");
+
+        jLbObservacion3.setBackground(new java.awt.Color(255, 255, 255));
+        jLbObservacion3.setText("Temperatura 1");
 
         javax.swing.GroupLayout jPanelObservacion1Layout = new javax.swing.GroupLayout(jPanelObservacion1);
         jPanelObservacion1.setLayout(jPanelObservacion1Layout);
@@ -128,20 +136,21 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             .addGroup(jPanelObservacion1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelObservacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelObservacion1Layout.createSequentialGroup()
-                        .addComponent(jLbObservacion1)
-                        .addContainerGap(459, Short.MAX_VALUE))
-                    .addGroup(jPanelObservacion1Layout.createSequentialGroup()
-                        .addComponent(jTxtTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTxtPob1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108))))
+                    .addComponent(jTxtTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbObservacion1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addGroup(jPanelObservacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtPob1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbObservacion3))
+                .addGap(108, 108, 108))
         );
         jPanelObservacion1Layout.setVerticalGroup(
             jPanelObservacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObservacion1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLbObservacion1)
+                .addGroup(jPanelObservacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLbObservacion1)
+                    .addComponent(jLbObservacion3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelObservacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +164,10 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jPanelObservacion2.setBackground(new java.awt.Color(0, 153, 255));
 
         jLbObservacion2.setBackground(new java.awt.Color(255, 255, 255));
-        jLbObservacion2.setText("Obervación 2");
+        jLbObservacion2.setText("Tiempo 2");
+
+        jLbObservacion4.setBackground(new java.awt.Color(255, 255, 255));
+        jLbObservacion4.setText("Temperatura 2");
 
         javax.swing.GroupLayout jPanelObservacion2Layout = new javax.swing.GroupLayout(jPanelObservacion2);
         jPanelObservacion2.setLayout(jPanelObservacion2Layout);
@@ -164,20 +176,21 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             .addGroup(jPanelObservacion2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelObservacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelObservacion2Layout.createSequentialGroup()
-                        .addComponent(jLbObservacion2)
-                        .addContainerGap(466, Short.MAX_VALUE))
-                    .addGroup(jPanelObservacion2Layout.createSequentialGroup()
-                        .addComponent(jTxtTiempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTxtPob2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))))
+                    .addComponent(jTxtTiempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbObservacion2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addGroup(jPanelObservacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtPob2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbObservacion4))
+                .addGap(107, 107, 107))
         );
         jPanelObservacion2Layout.setVerticalGroup(
             jPanelObservacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObservacion2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLbObservacion2)
+                .addGroup(jPanelObservacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLbObservacion2)
+                    .addComponent(jLbObservacion4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelObservacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtTiempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,27 +201,27 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jPanelPrincipal.add(jPanelObservacion2);
         jPanelObservacion2.setBounds(11, 185, 550, 80);
 
-        jBtnCalcularFuncion.setText("Generar función");
-        jBtnCalcularFuncion.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCalcular.setText("Generar función");
+        jBtnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCalcularFuncionActionPerformed(evt);
+                jBtnCalcularActionPerformed(evt);
             }
         });
-        jPanelPrincipal.add(jBtnCalcularFuncion);
-        jBtnCalcularFuncion.setBounds(217, 295, 122, 23);
+        jPanelPrincipal.add(jBtnCalcular);
+        jBtnCalcular.setBounds(220, 340, 115, 23);
 
         jLbTitulo.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLbTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLbTitulo.setText("Crecimiento poblacional");
+        jLbTitulo.setText("Ley de enfriamiento de Newton");
         jPanelPrincipal.add(jLbTitulo);
-        jLbTitulo.setBounds(149, 10, 281, 30);
+        jLbTitulo.setBounds(130, 10, 360, 30);
 
         jLbFuncion.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLbFuncion.setForeground(new java.awt.Color(255, 255, 255));
         jLbFuncion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLbFuncion.setText("P(t) = ");
+        jLbFuncion.setText("T(t) = ");
         jPanelPrincipal.add(jLbFuncion);
-        jLbFuncion.setBounds(14, 348, 400, 28);
+        jLbFuncion.setBounds(20, 390, 400, 28);
 
         jBtnLimpiar.setText("Reiniciar");
         jBtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +230,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jBtnLimpiar);
-        jBtnLimpiar.setBounds(470, 650, 90, 23);
+        jBtnLimpiar.setBounds(470, 690, 90, 23);
 
         jCbxTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "segundos", "minutos", "horas", "días", "meses", "años" }));
         jCbxTiempo.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +246,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jLbEUTiempo.setForeground(new java.awt.Color(255, 255, 255));
         jLbEUTiempo.setText("Unidad de tiempo:");
         jPanelPrincipal.add(jLbEUTiempo);
-        jLbEUTiempo.setBounds(6, 60, 125, 18);
+        jLbEUTiempo.setBounds(6, 60, 140, 18);
 
         jPanelPoblacion.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -245,7 +258,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jLbTiempo1.setForeground(new java.awt.Color(255, 255, 255));
         jLbTiempo1.setText("---");
 
-        jBtnCalcularP3.setText("habrá una población de");
+        jBtnCalcularP3.setText("habrá una temperatura de");
         jBtnCalcularP3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCalcularP3ActionPerformed(evt);
@@ -273,7 +286,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
                         .addComponent(jTxtT3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLbTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanelPoblacionLayout.setVerticalGroup(
             jPanelPoblacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,13 +304,13 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         );
 
         jPanelPrincipal.add(jPanelPoblacion);
-        jPanelPoblacion.setBounds(20, 430, 544, 103);
+        jPanelPoblacion.setBounds(20, 470, 537, 103);
 
         jPanelTiempo.setBackground(new java.awt.Color(0, 204, 204));
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Para una población de ");
+        jLabel7.setText("Para una temperatura de ");
 
         jBtnT3.setText("deberan transcurrir");
         jBtnT3.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +355,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         );
 
         jPanelPrincipal.add(jPanelTiempo);
-        jPanelTiempo.setBounds(20, 540, 544, 100);
+        jPanelTiempo.setBounds(20, 580, 544, 100);
 
         jSlrDecimales.setMaximum(10);
         jSlrDecimales.setMinimum(1);
@@ -367,7 +380,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
             }
         });
         jPanelPrincipal.add(jBtnVerProcedimientos);
-        jBtnVerProcedimientos.setBounds(392, 391, 166, 30);
+        jBtnVerProcedimientos.setBounds(390, 430, 166, 30);
 
         jButton1.setText("Imprimir");
         jPanelPrincipal.add(jButton1);
@@ -443,18 +456,17 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         );
 
         jPanelPrincipal.add(jPanelTiempo1);
-        jPanelTiempo1.setBounds(20, 700, 544, 110);
+        jPanelTiempo1.setBounds(20, 740, 535, 110);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1500, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Temperatura del medio: ");
+        jPanelPrincipal.add(jLabel1);
+        jLabel1.setBounds(100, 290, 150, 15);
+        jPanelPrincipal.add(jTxtTempMedio);
+        jTxtTempMedio.setBounds(260, 290, 150, 23);
+
+        getContentPane().add(jPanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 892));
 
         pack();
         setLocationRelativeTo(null);
@@ -530,7 +542,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         textPane.setEditable(false);
     }
 
-    private void textoLatex(JLabel jLb, String latex) {
+    private void textoLatex(String latex, JLabel jLb) {
         TeXFormula formula = new TeXFormula(latex);
 
         // Crear el ícono con tamaño (20 es un buen punto de partida)
@@ -556,83 +568,112 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
 
     public void calcularFuncion() throws BadLocationException {
         try {
+
             limpiarTextPane(jTxPaneFuncion);
             StringBuilder sb = new StringBuilder();
-            int numPasos = 20;
+            int numPasos = 24;
             String paso[] = new String[numPasos];
+
             String tiempo1 = jTxtTiempo1.getText();
             String poblacion1 = jTxtPob1.getText();
             String tiempo2 = jTxtTiempo2.getText();
             String poblacion2 = jTxtPob2.getText();
+            String tMedio = jTxtTempMedio.getText();
 
-            paso[0] = String.format("t_1=%s \\quad P_1=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo1, poblacion1, tiempo1, poblacion1);
-            paso[1] = String.format("t_2=%s \\quad P_2=%s \\quad\\Rightarrow \\quad P(%s)=%s", tiempo2, poblacion2, tiempo2, poblacion2);
+            paso[0] = String.format("t_1=%s \\quad T_1=%s^\\circ \\quad\\Rightarrow \\quad T(%s)=%s^\\circ", tiempo1, poblacion1, tiempo1, poblacion1);
+            paso[1] = String.format("t_2=%s \\quad T_2=%s^\\circ \\quad\\Rightarrow \\quad T(%s)=%s^\\circ", tiempo2, poblacion2, tiempo2, poblacion2);
 
             double t1 = Double.parseDouble(tiempo1);
             double p1 = Double.parseDouble(poblacion1);
             double t2 = Double.parseDouble(tiempo2);
             double p2 = Double.parseDouble(poblacion2);
+            double tm = Double.parseDouble(tMedio);
 
-            k = Double.parseDouble(truncar(Math.log(p2 / p1) / (t2 - t1)));
-            c = Double.parseDouble(truncar(p1 / Math.pow(Math.E, t1 * k)));
-            vC = truncar(c);
-            vK = truncar(k);
-            System.out.println("vC= " + vC);
-            System.out.println("vK= " + vK);
-            nDecimales = jSlrDecimales.getValue();
-
-            String formulaInicial = String.format("P(t)=Ce^{kt}");
-            paso[2] = formulaInicial;
-            paso[3] = String.format("P(%s)=Ce^{k(%s)}", tiempo1, tiempo1);
-
-            if (t1 == 0) {
-                paso[4] = String.format("%s=Ce^{" + tiempo1 + "}", poblacion1);
-                paso[5] = String.format("%s=C(1)", poblacion1);
-                paso[6] = String.format("C=%s", truncar(p1 / Math.pow(Math.E, t1 * k)));
-                paso[7] = String.format("P(t)= %s e^{kt}", (vC));
-                paso[8] = String.format("P(%s)=" + (vC) + "e^{k(%s)}", tiempo2, tiempo2);
-                paso[9] = String.format("%s=" + (vC) + "e^{%sk}", poblacion2, tiempo2);
-                paso[10] = String.format("\\frac{%s}{" + poblacion1 + "}=e^{%sk}", poblacion2, tiempo2);
-                paso[11] = String.format(truncar(p2 / p1) + "=e^{%sk}", tiempo2);
-                paso[12] = String.format("\\ln{(" + truncar(p2 / p1) + ")}=\\ln{e^{%sk}}", tiempo2);
-                paso[13] = String.format(truncar(Math.log(p2 / p1)) + "=%sk", truncar(t2 - t1));
-                paso[14] = String.format("k=\\frac{" + truncar(Math.log(p2 / p1)) + "}{" + truncar(t2 - t1) + "}");
-                paso[15] = String.format("k=" + truncar(Math.log(p2 / p1) / (t2 - t1)));
-                paso[16] = String.format("\\textcolor{blue}{P(t) = %s e^{%st}}", (vC), (vK));
-                numPasos = 17;
+            if (p1 > p2 && tm >= p2) {
+                JOptionPane.showMessageDialog(null, "Ingresa una temperatura ambiente valida", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (p1 < p2 && tm <= p1) {
+                JOptionPane.showMessageDialog(null, "Ingresa una temperatura ambiente valida", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (t2 < t1) {
+                JOptionPane.showMessageDialog(null, "Tiempo 2 no puede ser menor a Tiempo 1", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                paso[4] = String.format("%s=Ce^{%sk}", poblacion1, tiempo1);
-                paso[5] = String.format("\\frac{%s}{e^{%sk}}=C", poblacion1, tiempo1, tiempo2);
-                paso[6] = String.format("C=%se^{-%sk}", poblacion1, tiempo1);
-                paso[7] = String.format("P(t)= %s e^{-%sk} e^{kt}", poblacion1, tiempo1);
-                paso[8] = String.format("P(%s)={%s}{e^{-%sk}}e^{k(%s)}", tiempo2, poblacion1, tiempo1, tiempo2);
-                paso[9] = String.format("%s={%s}{e^{-%sk}}e^{%sk}", poblacion2, poblacion1, tiempo1, tiempo2);
-                paso[10] = String.format("\\frac{%s}{" + poblacion1 + "}=e^{{" + truncar(t2 - t1) + "}k}", poblacion2);
-                paso[11] = String.format(truncar(p2 / p1) + "=e^{{" + truncar(t2 - t1) + "}k}");
-                paso[12] = String.format("\\ln{(" + truncar(p2 / p1) + ")}=\\ln{e^{{" + truncar(t2 - t1) + "}k}}");
-                paso[13] = String.format(truncar(Math.log(p2 / p1)) + "=%sk", truncar(t2 - t1));
-                paso[14] = String.format("k=\\frac{" + truncar(Math.log(p2 / p1)) + "}{" + truncar(t2 - t1) + "}");
-                paso[15] = String.format("k=" + vK);
-                paso[16] = String.format("C=%s{e^{-%s(%s)}}", poblacion1, tiempo1, vK);
-                paso[17] = String.format("C=%s {(%s)}", poblacion1, truncar(Math.pow(Math.E, (-t1) * (k))));
-                paso[18] = String.format("C=%s", vC);
-                paso[19] = String.format("\\textcolor{blue}{P(t) = %s e^{%st}}", (vC), (vK));
-                numPasos = 20;
+
+                k = Double.parseDouble(truncar(Math.log((p2 - tm) / (p1 - tm)) / (t2 - t1)));
+
+                String r = truncar(Math.pow(Math.E, (-t1 * k)));
+                double r2 = Double.parseDouble(r);
+
+                System.out.println("r2: " + r2);
+                double a = p1 - tm;
+                System.out.println("r: " + a);
+                double rr = a / r2;
+                System.out.println("rr: " + rr);
+
+                c = Double.parseDouble(truncar((p1 - tm) * r2));
+                vC = truncar(c);
+                vK = truncar(k);
+
+                System.out.println("c: " + c);
+
+                nDecimales = jSlrDecimales.getValue();
+
+                jLbTiempo1.setText("" + jCbxTiempo.getSelectedItem().toString());
+
+                String formulaInicial = String.format("T(t)=Ce^{kt} + Tm");
+                paso[2] = formulaInicial;
+                paso[3] = String.format("T(%s)=Ce^{k(%s)} + %s^\\circ", tiempo1, tiempo1, tMedio);
+                if (t1 == 0) {
+                    paso[4] = String.format("%s^\\circ=Ce^{" + tiempo1 + "} + %s^\\circ", poblacion1, tMedio);
+                    paso[5] = String.format("%s^\\circ - %s^\\circ=C(1)", poblacion1, tMedio);
+                    paso[6] = String.format("%s^\\circ=C(1)", truncar(p1 - tm));
+                    paso[7] = String.format("C=%s", vC);
+                    paso[8] = String.format("T(t)=" + (vC) + "e^{kt} + %s^\\circ", tMedio);
+                    paso[9] = String.format("T(%s)=" + (vC) + "e^{k(%s)} + %s^\\circ", tiempo2, tiempo2, tMedio);
+                    paso[10] = String.format("%s^\\circ=" + (vC) + "e^{%sk} + %s^\\circ", poblacion2, tiempo2, tMedio);
+                    paso[11] = String.format("%s^\\circ - %s^\\circ=" + (vC) + "e^{%sk}", poblacion2, tMedio, tiempo2);
+                    paso[12] = String.format("%s^\\circ=" + (vC) + "e^{%sk}", truncar(p2 - tm), tiempo2);
+                    paso[13] = String.format("\\frac{%s}{" + (vC) + "}=e^{%sk}", truncar(p2 - tm), tiempo2);
+                    paso[14] = String.format("\\ln{(\\frac{%s}{" + (vC) + "})}=\\ln{(e^{%sk})}", truncar(p2 - tm), tiempo2);
+                    paso[15] = String.format(truncar(Math.log((p2 - tm) / c)) + "=" + truncar(t2 - t1) + "k");
+                    paso[16] = String.format("k=\\frac{" + truncar(Math.log((p2 - tm) / c)) + "}{" + truncar(t2 - t1) + "}");
+                    paso[17] = String.format("k=" + (vK));
+                    paso[18] = String.format("\\textcolor{blue}{T(t) = %s e^{%st} + %s^\\circ}", (vC), (vK), tMedio);
+                    numPasos = 19;
+                } else {
+                    paso[4] = String.format("%s=Ce^{%sk} + %s", poblacion1, tiempo1, tMedio);
+                    paso[5] = String.format("%s - %s=Ce^{%sk} + %s", poblacion1, tMedio, tiempo1, tMedio);
+                    paso[6] = String.format("%s=Ce^{%sk}", truncar(p1 - tm), tiempo1);
+                    paso[7] = String.format("\\frac{%s}{e^{%sk}}=C", truncar(p1 - tm), tiempo1, tiempo2);
+                    paso[8] = String.format("C={%s}{e^{-%sk}}", truncar(p1 - tm), tiempo1);
+                    paso[9] = String.format("T(t)={%s}{e^{-%sk}}e^{kt} + %s", truncar(p1 - tm), tiempo1, tMedio);
+                    paso[10] = String.format("T(%s)={%s}{e^{-%sk}}e^{k(%s) + %s}", tiempo2, truncar(p1 - tm), tiempo1, tiempo2, tMedio);
+                    paso[11] = String.format("%s={%s}{e^{-%sk}}e^{%sk} + %s", poblacion2, truncar(p1 - tm), tiempo1, tiempo2, tMedio);
+                    paso[12] = String.format("%s - %s={%s}{e^{-%sk}}e^{%sk}", poblacion2, tMedio, truncar(p1 - tm), tiempo1, tiempo2);
+                    paso[13] = String.format("%s={%s}{e^{-%sk}}e^{%sk}", truncar(p2 - tm), truncar(p1 - tm), tiempo1, tiempo2);
+                    paso[14] = String.format("\\frac{%s}{" + truncar(p1 - tm) + "}=e^{{" + truncar(t2 - t1) + "}k}", truncar(p2 - tm));//////////
+                    paso[15] = String.format(truncar((p2 - tm) / (p1 - tm)) + "=e^{{" + truncar(t2 - t1) + "}k}");
+                    paso[16] = String.format("\\ln{(" + truncar((p2 - tm) / (p1 - tm)) + ")}=\\ln{e^{{" + truncar(t2 - t1) + "}k}}");
+                    paso[17] = String.format(truncar(Math.log((p2 - tm) / (p1 - tm))) + "=%sk", truncar(t2 - t1));
+                    paso[18] = String.format("k=\\frac{" + truncar(Math.log((p2 - tm) / (p1 - tm))) + "}{" + truncar(t2 - t1) + "}");
+                    paso[19] = String.format("k=" + truncar(Math.log((p2 - tm) / (p1 - tm)) / (t2 - t1)));
+                    paso[20] = String.format("C={%s}{e^{-%s(%s)}}", truncar(p1 - tm), tiempo1, k);
+                    paso[21] = String.format("C={%s}{(%s)}", truncar(p1 - tm), truncar(Math.pow(Math.E, -t1 * k)));
+                    paso[22] = String.format("C=%s", vC);
+                    paso[23] = String.format("\\textcolor{blue}{T(t) = %s e^{%st} + %s}", (vC), (vK), tMedio);
+                    numPasos = 24;
+                }
+
+                for (int i = 0; i < numPasos; i++) {
+                    sb.append(paso[i]).append(" \\\\ ");
+                }
+                agregarLaTeX(jTxPaneFuncion, sb.toString());
+
+                System.out.println("c: " + vC);
+                System.out.println("k: " + vK);
+                funcion = String.format("T(t) = %s \\cdot e^{%st + %s}", (vC), (vK), tMedio);
+
+                textoLatex(funcion, jLbFuncion);
+                estado1 = true;
             }
-            for (int i = 0; i < numPasos; i++) {
-                sb.append(paso[i]).append(" \\\\ ");
-            }
-
-            agregarLaTeX(jTxPaneFuncion, sb.toString());
-
-            System.out.println("c: " + c);
-            System.out.println("k: " + k);
-
-            funcion = String.format("P(t) = %s \\cdot e^{%st}", truncar(c), k);
-
-            textoLatex(jLbFuncion, funcion);
-            estado1 = true;
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ingresa valores válidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -665,24 +706,26 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         try {
             limpiarTextPane(jTxPanePoblacion);
             StringBuilder sb = new StringBuilder();
-            int numPasos = 10;
-            String paso[] = new String[numPasos];
 
-            double p3, t3;
+            //String fP3=formatearResultado(p3);
+            //jLbPob3.setText(fP3);
+            double p3, t3, tMedio;
             String tiempo3 = jTxtT3.getText();
+            tMedio = Double.parseDouble(jTxtTempMedio.getText());
             t3 = Double.parseDouble(tiempo3);
-            p3 = c * Math.pow(Math.E, k * t3);
+            p3 = c * Math.pow(Math.E, k * t3) + tMedio;
             jLbPob3.setText("" + truncar(p3));
 //            BigDecimal bdP3 = BigDecimal.valueOf(p3).setScale(nDecimales, RoundingMode.DOWN);
 //            String fc = limpiarDecimal(bdP3);
             //String letrero1=String.format("Obteniendo\\quadla\\quadpoblación\\quadpara\\quadun\\quadtiempo\\quadde\\quad"+tiempo3+"\\quadaños.");
-            String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo la población para un tiempo de %s años.}", tiempo3);
-            String letrero2 = String.format("P=? \\quad t=%s", tiempo3);
-            String letrero3 = String.format("P(t) = %s e^{%st}", (vC), (vK));
-            String paso1 = String.format("P(%s) = %s \\cdot e^{%s(%s)}", tiempo3, (vC), (vK), tiempo3);
-            String paso2 = String.format("P(%s) = %s \\cdot e^{" + truncar(k * t3) + "}", tiempo3, (vC));
-            String paso3 = String.format("P(%s) = %s (" + truncar(Math.pow(Math.E, k * t3)) + ")", tiempo3, (vC));
-            String paso4 = String.format("\\textcolor{blue}{P(%s) = " + truncar(c * Math.pow(Math.E, k * t3)) + "}", tiempo3);
+            String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo la Temperatura para un tiempo de %s" + jCbxTiempo.getSelectedItem().toString() + ".}", tiempo3);
+            String letrero2 = String.format("T=? \\quad t=%s", tiempo3);
+            String letrero3 = String.format("T(t) = %s e^{%st} + %s^\\circ", truncar(c), truncar(k), tMedio);
+            String paso1 = String.format("T(%s) = %s \\cdot e^{%s(%s)} + %s^\\circ", tiempo3, truncar(c), truncar(k), tiempo3, tMedio);
+            String paso2 = String.format("T(%s) = %s \\cdot e^{" + truncar(k * t3) + "} + %s^\\circ", tiempo3, truncar(c), tMedio);
+            String paso3 = String.format("T(%s) = %s (" + truncar(Math.pow(Math.E, k * t3)) + ") + %s^\\circ", tiempo3, truncar(c), tMedio);
+            String paso4 = String.format("T(%s) =" + truncar(c * Math.pow(Math.E, k * t3)) + " + %s^\\circ", tiempo3, tMedio);
+            String paso5 = String.format("\\textcolor{blue}{T(%s) = " + truncar(c * Math.pow(Math.E, k * t3) + tMedio) + "}", tiempo3);
 
             sb.append(letrero1).append(" \\\\ ")
                     .append(letrero2).append(" \\\\ ")
@@ -690,7 +733,8 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
                     .append(paso1).append(" \\\\ ")
                     .append(paso2).append(" \\\\ ")
                     .append(paso3).append(" \\\\ ")
-                    .append(paso4).append(" \\\\ ");
+                    .append(paso4).append(" \\\\ ")
+                    .append(paso5).append(" \\\\ ");
 // Finalmente, agregamos al JTextPane como una sola imagen
             agregarLaTeX(jTxPanePoblacion, sb.toString());
 
@@ -704,21 +748,30 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         try {
             limpiarTextPane(jTxPaneTiempo);
             StringBuilder sb = new StringBuilder();
-            double t3, p3;
+
+            double t3, p3, tMedio;
+            tMedio = Double.parseDouble(jTxtTempMedio.getText());
             String poblacion3 = jTxtP3.getText();
             p3 = Double.parseDouble(poblacion3);
-            t3 = Math.log(p3 / c) / k;
+            t3 = Math.log((p3 - tMedio) / c) / k;
             jLbT3.setText(truncar(t3) + " " + jCbxTiempo.getSelectedItem().toString());
-            String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo el tiempo para una población de %s.}", poblacion3);
-            String letrero2 = String.format("P=%s \\quad t=?", poblacion3);
-            String letrero3 = String.format("P(t) = %s e^{%st}", (vC), (vK));
-            String letrero4 = String.format("%s= %s\\cdot e^{" + (vK) + "t}", poblacion3, (vC));
-            String letrero5 = String.format("\\frac{%s}{%s}=e^{" + (vK) + "t}", poblacion3, (vC));
-            String letrero6 = String.format(truncar(p3 / c) + "=e^{" + (vK) + "t}");
-            String letrero7 = String.format("\\ln{(" + truncar(p3 / c) + ")}=\\ln{(e^{" + (vK) + "t})}");
-            String letrero8 = String.format(truncar(Math.log(p3 / c)) + "=" + (vK) + "t");
-            String letrero9 = String.format("t=\\frac{" + truncar(Math.log(p3 / c)) + "}{%s}", (vK));
-            String letrero10 = String.format("\\textcolor{blue}{t=" + truncar(Math.log(p3 / c) / k) + "}");
+
+            String letrero1 = String.format("\\blacktriangledown\\text{Obteniendo el tiempo para una Temperatura de %s.}", poblacion3);
+            String letrero2 = String.format("T=%s \\quad t=?", poblacion3);
+            String letrero3 = String.format("T(t) = %s e^{%st} + %s^\\circ", truncar(c), truncar(k), tMedio);
+            String letrero4 = String.format("%s= %s\\cdot e^{" + truncar(k) + "t} + %s^\\circ", poblacion3, truncar(c), tMedio);
+            String letrero5 = String.format("%s - %s= %s\\cdot e^{" + truncar(k) + "t}", poblacion3, tMedio, truncar(c));
+            String letrero6 = String.format(truncar(p3 - tMedio) + "= %s\\cdot e^{" + truncar(k) + "t}", truncar(c));
+
+            String letrero7 = String.format("\\frac{" + truncar(p3 - tMedio) + "}{%s}=e^{" + truncar(k) + "t}", truncar(c));
+            String letrero8 = String.format("\\ln (\\frac{" + truncar(p3 - tMedio) + "}{%s})=\\ln (e^{" + truncar(k) + "t})", truncar(c));
+            String letrero9 = String.format(truncar(Math.log(p3 - tMedio)) + "=" + truncar(Math.pow(Math.E, k)) + "t");
+
+            String letrero10 = String.format("t=\\frac{" + truncar(Math.log(p3 - tMedio)) + "}{" + truncar(Math.pow(Math.E, k)) + "}");
+            /*String letrero11 = String.format("\\ln{(" + truncar(p3 / c) + ")}=\\ln{(e^{" + truncar(k) + "t})}");
+            String letrero12 = String.format(truncar(Math.log(p3 / c)) + "=" + truncar(k) + "t");
+            String letrero13 = String.format("t=\\frac{" + truncar(Math.log(p3 / c)) + "}{%s}", truncar(k));*/
+            String letrero14 = String.format("\\textcolor{blue}{t=" + truncar(t3) + "}");
             // Armamos todo en un solo bloque LaTeX
             sb.append(letrero1).append(" \\\\ ")
                     .append(letrero2).append(" \\\\ ")
@@ -729,7 +782,11 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
                     .append(letrero7).append(" \\\\ ")
                     .append(letrero8).append(" \\\\ ")
                     .append(letrero9).append(" \\\\ ")
-                    .append(letrero10);
+                    .append(letrero10).append(" \\\\ ")
+                    /* .append(letrero11).append(" \\\\ ")
+                    .append(letrero12).append(" \\\\ ")
+                    .append(letrero13).append(" \\\\ ")*/
+                    .append(letrero14).append(" \\\\ ");
 // Finalmente, agregamos al JTextPane como una sola imagen
             agregarLaTeX(jTxPaneTiempo, sb.toString());
             estado3 = true;
@@ -779,20 +836,14 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         });
     }
 
-    private void jBtnCalcularFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularFuncionActionPerformed
+    private void jBtnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularActionPerformed
         try {
             // TODO add your handling code here:
             calcularFuncion();
-            if (estado2) {
-                calcularPoblacion();
-            }
-            if (estado3) {
-                calcularTiempo();
-            }
         } catch (BadLocationException ex) {
             Logger.getLogger(CrecimientoPoblacional.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnCalcularFuncionActionPerformed
+    }//GEN-LAST:event_jBtnCalcularActionPerformed
 
     private void jBtnCalcularP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCalcularP3ActionPerformed
         try {
@@ -928,13 +979,13 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrecimientoPoblacional().setVisible(true);
+                new LeyDeEnfriamientoDeNewton1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCalcularFuncion;
+    private javax.swing.JButton jBtnCalcular;
     private javax.swing.JButton jBtnCalcularP3;
     private javax.swing.JButton jBtnLimpiar;
     private javax.swing.JButton jBtnT3;
@@ -945,6 +996,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -954,6 +1006,8 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
     private javax.swing.JLabel jLbNumDec;
     private javax.swing.JLabel jLbObservacion1;
     private javax.swing.JLabel jLbObservacion2;
+    private javax.swing.JLabel jLbObservacion3;
+    private javax.swing.JLabel jLbObservacion4;
     private javax.swing.JLabel jLbPob3;
     private javax.swing.JLabel jLbT3;
     private javax.swing.JLabel jLbTiempo1;
@@ -975,6 +1029,7 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
     private javax.swing.JTextField jTxtPob1;
     private javax.swing.JTextField jTxtPob2;
     private javax.swing.JTextField jTxtT3;
+    private javax.swing.JTextField jTxtTempMedio;
     private javax.swing.JTextField jTxtTiempo1;
     private javax.swing.JTextField jTxtTiempo2;
     // End of variables declaration//GEN-END:variables
