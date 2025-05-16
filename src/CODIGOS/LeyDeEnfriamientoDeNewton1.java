@@ -99,7 +99,6 @@ public class LeyDeEnfriamientoDeNewton1 extends javax.swing.JFrame {
         jLbDecimal = new javax.swing.JLabel();
         jLbNumDec = new javax.swing.JLabel();
         jBtnVerProcedimientos = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTxPaneFuncion = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -382,10 +381,6 @@ public class LeyDeEnfriamientoDeNewton1 extends javax.swing.JFrame {
         jPanelPrincipal.add(jBtnVerProcedimientos);
         jBtnVerProcedimientos.setBounds(390, 430, 166, 30);
 
-        jButton1.setText("Imprimir");
-        jPanelPrincipal.add(jButton1);
-        jButton1.setBounds(1000, 840, 77, 23);
-
         jScrollPane1.setViewportView(jTxPaneFuncion);
 
         jPanelPrincipal.add(jScrollPane1);
@@ -434,7 +429,7 @@ public class LeyDeEnfriamientoDeNewton1 extends javax.swing.JFrame {
                     .addComponent(jCheckBox1))
                 .addGap(77, 77, 77)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanelTiempo1Layout.setVerticalGroup(
             jPanelTiempo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -990,7 +985,6 @@ public class LeyDeEnfriamientoDeNewton1 extends javax.swing.JFrame {
     private javax.swing.JButton jBtnLimpiar;
     private javax.swing.JButton jBtnT3;
     private javax.swing.JButton jBtnVerProcedimientos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCbxTiempo;
     private javax.swing.JCheckBox jCheckBox1;
