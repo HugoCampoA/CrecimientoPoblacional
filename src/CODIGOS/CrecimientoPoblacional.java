@@ -97,7 +97,6 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         jLbDecimal = new javax.swing.JLabel();
         jLbNumDec = new javax.swing.JLabel();
         jBtnVerProcedimientos = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTxPaneFuncion = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -368,10 +367,6 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
         });
         jPanelPrincipal.add(jBtnVerProcedimientos);
         jBtnVerProcedimientos.setBounds(392, 391, 166, 30);
-
-        jButton1.setText("Imprimir");
-        jPanelPrincipal.add(jButton1);
-        jButton1.setBounds(1000, 840, 77, 23);
 
         jScrollPane1.setViewportView(jTxPaneFuncion);
 
@@ -939,7 +934,6 @@ public class CrecimientoPoblacional extends javax.swing.JFrame {
     private javax.swing.JButton jBtnLimpiar;
     private javax.swing.JButton jBtnT3;
     private javax.swing.JButton jBtnVerProcedimientos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCbxTiempo;
     private javax.swing.JCheckBox jCheckBox1;
